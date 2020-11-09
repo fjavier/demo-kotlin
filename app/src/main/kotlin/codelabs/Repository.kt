@@ -16,31 +16,24 @@ object Repository {
         return users
     }
 
-    val formattedUserNames: List<String?>
+    val formattedUserNames: List<String>
         get() {
-            //El !! convierte cualquier variable a tipo non-null
-            val userNames = ArrayList<String>(users.size)
-            //Al hacer la lista inmutable y no permitir que esta sea nula, entonces podemos eliminar el !!
-            //Destructuracion
-            for ((firstname, lastname) in users){
-                val name:String
-
-                name = if(lastname != null){
-                    if (firstname != null){
+            return users.map { user ->
+                if(user.lastname != null){
+                    if (user.firstname != null){
                         //Los stringtemplates nos permiten referenciar el valor de las variables dentro de las cadenas
                         //esto meditan ${}
-                        "${firstname}  ${lastname}"
+                        "${user.firstname}  ${user.lastname}"
                     }else{
-                        lastname
+                        user.lastname?:"Unknown"
                     }
                 }else{
                     //El operador elvis ? retorna el valor de la expresion a evaluar si es diferente de nulo
                     //en caso contrario devuelve el valor del lado derecho
-                   firstname?:"Unknown"
+                    user.firstname?:"Unknown"
                 }
-                userNames.add(name)
+
             }
-            return userNames
         }
 
     /**
