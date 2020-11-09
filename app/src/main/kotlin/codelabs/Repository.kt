@@ -1,7 +1,12 @@
 package codelabs
 
-
-class Repository private constructor(){
+/**
+ * Ya que solo necesitamos una sola instancia del objeto Repository esto lo hacemos mediante el patron
+ * singleton, en Java forzamos obtener la instancia por medio de un metodo estatico.
+ * En el caso de kotlin solo necesitamos declarar la clase como object
+ * 
+ */
+object Repository {
     private var users : MutableList<User>? = null
 
     fun getUsers() : List<User>?{
@@ -34,7 +39,7 @@ class Repository private constructor(){
      * <code>companion object </object> es el homologo al keyword static en Java
      * De esta manera creamos un metodo estatico, en este caso estamos obteniendo la instancia de
      * la clase Repository
-     */
+
     companion object{
         private var INSTANCE : Repository? = null
         val instance : Repository?
@@ -49,7 +54,7 @@ class Repository private constructor(){
                 return INSTANCE;
             }
     }
-
+     */
     //El init es el inicializador
     init {
         val user1 = User("Jane", "")
