@@ -4,10 +4,13 @@ package codelabs
  * Ya que solo necesitamos una sola instancia del objeto Repository esto lo hacemos mediante el patron
  * singleton, en Java forzamos obtener la instancia por medio de un metodo estatico.
  * En el caso de kotlin solo necesitamos declarar la clase como object
- * 
+ *
  */
 object Repository {
-    private var users : MutableList<User>? = null
+    //Inicializamos la lista de usuarios por medio de la funcion mutableListOf
+    //y dejamos que el tipo sea inferido
+    //Hacemos la lista inmutable
+    private val users  = mutableListOf<User>()
 
     fun getUsers() : List<User>?{
         return users
@@ -15,18 +18,21 @@ object Repository {
 
     val formattedUserNames: List<String?>
         get() {
-            val userNames:MutableList<String?> = ArrayList(users!!.size)
-            for (user in users!!){
+            //El !! convierte cualquier variable a tipo non-null
+            val userNames = ArrayList<String>(users.size)
+            //Al hacer la lista inmutable y no permitir que esta sea nula, entonces podemos eliminar el !!
+            //Destructuracion
+            for ((firstname, lastname) in users){
                 var name:String
 
-                name = if(user!!.lastname != null){
-                    if (user!!.firstname != null){
-                        user.firstname + " " + user.lastname
+                name = if(lastname != null){
+                    if (firstname != null){
+                        firstname + " " + lastname
                     }else{
-                        user!!.lastname + ""
+                        lastname + ""
                     }
-                }else if(user!!.firstname != null){
-                    user!!.firstname + ""
+                }else if(firstname != null){
+                    firstname + ""
                 }else{
                     "Unknown"
                 }
@@ -60,7 +66,6 @@ object Repository {
         val user1 = User("Jane", "")
         val user2 = User("John", null)
         val user3 = User("Anne", "Doe")
-        users = ArrayList()
-        users?.add(user1)
+        users.add(user1)
     }
 }
