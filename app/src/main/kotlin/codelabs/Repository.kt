@@ -23,7 +23,7 @@ object Repository {
             //Al hacer la lista inmutable y no permitir que esta sea nula, entonces podemos eliminar el !!
             //Destructuracion
             for ((firstname, lastname) in users){
-                var name:String
+                val name:String
 
                 name = if(lastname != null){
                     if (firstname != null){
@@ -31,10 +31,10 @@ object Repository {
                     }else{
                         lastname + ""
                     }
-                }else if(firstname != null){
-                    firstname + ""
                 }else{
-                    "Unknown"
+                    //El operador elvis ? retorna el valor de la expresion a evaluar si es diferente de nulo
+                    //en caso contrario devuelve el valor del lado derecho
+                   firstname?:"Unknown"
                 }
                 userNames.add(name)
             }
