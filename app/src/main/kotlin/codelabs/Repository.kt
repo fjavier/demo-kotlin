@@ -1,4 +1,37 @@
 package codelabs
+//Extension de funcion de alto nivel
+fun User.getFormmattedUserNames():String{
+    return if(lastname != null){
+        if (firstname != null){
+            //Los stringtemplates nos permiten referenciar el valor de las variables dentro de las cadenas
+            //esto meditan ${}
+            "${firstname}  ${lastname}"
+        }else{
+            lastname?:"Unknown"
+        }
+    }else{
+        //El operador elvis ? retorna el valor de la expresion a evaluar si es diferente de nulo
+        //en caso contrario devuelve el valor del lado derecho
+        firstname?:"Unknown"
+    }
+}
+
+//Extension de propiedad de alto nivel
+ val User.formattedUserNames:String get() {
+    return if(lastname != null){
+        if (firstname != null){
+            //Los stringtemplates nos permiten referenciar el valor de las variables dentro de las cadenas
+            //esto meditan ${}
+            "${firstname}  ${lastname}"
+        }else{
+            lastname?:"Unknown"
+        }
+    }else{
+        //El operador elvis ? retorna el valor de la expresion a evaluar si es diferente de nulo
+        //en caso contrario devuelve el valor del lado derecho
+        firstname?:"Unknown"
+    }
+}
 
 /**
  * Ya que solo necesitamos una sola instancia del objeto Repository esto lo hacemos mediante el patron
@@ -19,22 +52,8 @@ object Repository {
 
     val formattedUserNames: List<String>
         get() {
-            return users.map { user ->
-                if(user.lastname != null){
-                    if (user.firstname != null){
-                        //Los stringtemplates nos permiten referenciar el valor de las variables dentro de las cadenas
-                        //esto meditan ${}
-                        "${user.firstname}  ${user.lastname}"
-                    }else{
-                        user.lastname?:"Unknown"
-                    }
-                }else{
-                    //El operador elvis ? retorna el valor de la expresion a evaluar si es diferente de nulo
-                    //en caso contrario devuelve el valor del lado derecho
-                    user.firstname?:"Unknown"
-                }
-
-            }
+            //Accedemos por medio de la extension de propiedad
+            return _users.map { user: User -> user.formattedUserNames }
         }
 
     /**
@@ -65,5 +84,9 @@ object Repository {
         _users.add(user1)
         _users.add(user2)
         _users.add(user3)
+        //Accediendo por medio de extension de propiedad
+        val name = user1.getFormmattedUserNames()
+        //Accediendo por medio de extension de propiedad
+        val formmattedName = user2.formattedUserNames
     }
 }

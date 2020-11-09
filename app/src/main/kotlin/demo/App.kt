@@ -4,7 +4,6 @@
 package demo
 
 import codelabs.Repository
-import codelabs.User
 
 class App {
     val greeting: String
