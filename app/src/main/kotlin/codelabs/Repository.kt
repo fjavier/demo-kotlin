@@ -30,6 +30,11 @@ class Repository private constructor(){
             return userNames
         }
 
+    /**
+     * <code>companion object </object> es el homologo al keyword static en Java
+     * De esta manera creamos un metodo estatico, en este caso estamos obteniendo la instancia de
+     * la clase Repository
+     */
     companion object{
         private var INSTANCE : Repository? = null
         val instance : Repository?
@@ -45,11 +50,12 @@ class Repository private constructor(){
             }
     }
 
+    //El init es el inicializador
     init {
         val user1 = User("Jane", "")
         val user2 = User("John", null)
         val user3 = User("Anne", "Doe")
-        users = ArrayList<User>()
+        users = ArrayList()
         users?.add(user1)
     }
 }
