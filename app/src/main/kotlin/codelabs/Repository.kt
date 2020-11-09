@@ -27,9 +27,11 @@ object Repository {
 
                 name = if(lastname != null){
                     if (firstname != null){
-                        firstname + " " + lastname
+                        //Los stringtemplates nos permiten referenciar el valor de las variables dentro de las cadenas
+                        //esto meditan ${}
+                        "${firstname}  ${lastname}"
                     }else{
-                        lastname + ""
+                        lastname
                     }
                 }else{
                     //El operador elvis ? retorna el valor de la expresion a evaluar si es diferente de nulo
