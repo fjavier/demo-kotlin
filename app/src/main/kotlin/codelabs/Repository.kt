@@ -10,11 +10,12 @@ object Repository {
     //Inicializamos la lista de usuarios por medio de la funcion mutableListOf
     //y dejamos que el tipo sea inferido
     //Hacemos la lista inmutable
-    private val users  = mutableListOf<User>()
+    private val _users  = mutableListOf<User>()
 
-    fun getUsers() : List<User>?{
-        return users
-    }
+    //protegemos la lista de usuarios de tal manera que esta no sea afectada desde donde se accede
+    //Haciendo que siempre devuelva la lista creada en el objeto
+    val users: List<User>
+        get() = _users
 
     val formattedUserNames: List<String>
         get() {
@@ -61,6 +62,8 @@ object Repository {
         val user1 = User("Jane", "")
         val user2 = User("John", null)
         val user3 = User("Anne", "Doe")
-        users.add(user1)
+        _users.add(user1)
+        _users.add(user2)
+        _users.add(user3)
     }
 }

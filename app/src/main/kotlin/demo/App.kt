@@ -14,19 +14,7 @@ class App {
 }
 
 fun main(args: Array<String>) {
-    var user =  User("Jane", "Doe")
-    val user1=  User("Jane", "Doe")
-    val user2 =  User("Jane", "Doe")
-
-    user = User("John")
-
-    //Igualdad Estructural
-    val structurallyEqual =  user1 == user2
-    val referentiallyEqual = user1 === user2
-
     println(App().greeting)
-    println(structurallyEqual)
-    println(referentiallyEqual)
-    println(user.toString())
-
+    Repository.users
+    println(Repository.users)
 }
